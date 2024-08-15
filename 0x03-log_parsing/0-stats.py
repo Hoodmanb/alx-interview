@@ -13,7 +13,9 @@ code_counts = {code: 0 for code in codes}
 def handle(sig, frame):
     """Handle keyboard interrupt (Ctrl+C)"""
     if sig == signal.SIGINT:
-        print_summary()
+        return True
+    if sig != signal.SIGINT:
+        return False
 
 
 def print_summary():
@@ -24,7 +26,7 @@ def print_summary():
             print("{}: {}".format(code, code_counts[code]))
 
 
-signal.signal(signal.SIGINT, handle)
+handleCall = signal.signal(signal.SIGINT, handle)
 
 regex = (
     r'(\d{1,3}(?:\.\d{1,3}){3}) - \[(.*?)\] '
@@ -50,6 +52,6 @@ while True:
 
     num += 1
 
-    if num == 10:
+    if num == 10 or handleCall:
         print_summary()
         num = 0
