@@ -3,12 +3,17 @@ import sys
 import re
 import signal
 
+
 def handle(sig, frame):
     if sig == signal.SIGINT:
         return True
     return False
 
-regex = r'(\d{1,3}(?:\.\d{1,3}){3}) - \[(.*?)\] "GET \/projects\/260 HTTP\/1\.1" (\d{3}) (\d+)'
+
+regex = (
+    r'(\d{1,3}(?:\.\d{1,3}){3}) - \[(.*?)\] '
+    r'"GET \/projects\/260 HTTP\/1\.1" (\d{3}) (\d+)'
+)
 num = 0
 size = 0
 lists = []
@@ -36,27 +41,3 @@ while True:
             if counts:
                 print('{}: {}'.format(c, counts))
             continue
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            # for index, item in enumerate(sortedList):
-                
-                
-                
-                
-                # if item == c:
-                #     print('item:', a)
-                    # print('c: ', index)
-                #     a += 1
-                # if index == len(lists) - 1:
-                #     print(a)
-                    # print('{}: {}'.format(c, a))
-                    # print('last line: ', index)
